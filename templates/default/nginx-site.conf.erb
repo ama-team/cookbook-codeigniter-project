@@ -1,0 +1,20 @@
+server {
+  listen 80;
+  listen [::]:80;
+  root <%= @document_root %>
+  index index.html index.php;
+
+  location / {
+    try_files $uri $uri/ /index.php?$args;
+  }
+
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:///var/run/php-fpm.sock;
+    include snippets/fastcgi-php.conf;
+  }
+
+  location ~/\. {
+    deny all;
+  }
+}

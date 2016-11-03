@@ -1,0 +1,7 @@
+<% @application_config.each_pair do |key, value| %>
+<%= @environment_variable_prefix %><%= key %>="<%= value %>"
+<% end %>
+
+<% @database_config.each_pair do |key, value| %>
+<%= @environment_variable_prefix %>DATABASE_<%= key %>="<%= value %>"
+<% end %>

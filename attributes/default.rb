@@ -1,0 +1,1 @@
+default['composer']['install_globally'] = true
