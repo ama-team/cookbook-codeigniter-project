@@ -70,8 +70,13 @@ action :create do
   _config = compute_config
 
   _config_directory = "#{_config.shared_files_directory}/application/config"
+  _log_directory = "#{_config.shared_files_directory}/application/logs"
 
   directory _config_directory do
+    recursive true
+  end
+
+  directory _log_directory do
     recursive true
   end
 
