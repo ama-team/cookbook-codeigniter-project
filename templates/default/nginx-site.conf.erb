@@ -1,7 +1,8 @@
 server {
   listen 80;
   listen [::]:80;
-  root <%= @document_root %>
+  server_name <%= @domain %>;
+  root <%= @document_root %>;
   index index.html index.php;
 
   location / {

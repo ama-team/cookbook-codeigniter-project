@@ -67,7 +67,9 @@ action :create do
 
   _config_directory = "#{_config.shared_files_directory}/application/config"
 
-  directory _config_directory
+  directory _config_directory do
+    recursive true
+  end
 
   template "#{_config_directory}/config.php" do
     source "config.php.erb"
@@ -97,8 +99,16 @@ action :create do
     action action
   end
 
-  template "/etc/nginx/sites-available" do
+  template "/etc/nginx/sites-available/#{_config.domain}" do
     source 'nginx-site.conf.erb'
+    variables({
+        document_root: _config.document_root,
+        domain: _config.domain
+    })
+  end
+
+  link "/etc/nginx/sites-enabled/#{_config.domain}" do
+    to "/etc/nginx/sites-available/#{_config.domain}"
   end
 
   if _config.manage_local_database
