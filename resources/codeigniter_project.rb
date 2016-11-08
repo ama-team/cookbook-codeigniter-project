@@ -91,13 +91,13 @@ action :create do
     action action
   end
 
-  template "#{_config_directory}/environment.php" do
+  template "#{_config_directory}/environment.sh" do
     source 'environment.erb'
     cookbook COOKBOOK_NAME
     variables({
                   database_config: _config.database_config.to_hash,
-                  application_config: _config.database_config.to_hash,
-                  environemnt_variable_prefix: _config.environment_variable_prefix
+                  application_config: _config.application_config.to_hash,
+                  environment_variable_prefix: _config.environment_variable_prefix
               })
     owner file_owner
     group file_group
