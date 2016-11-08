@@ -137,11 +137,11 @@ action :create do
     mysql_database _config.database_config.schema do
       connection mysql_connection
     end
-
     mysql_database_user _config.database_config.user do
       connection mysql_connection
       password _config.database_config.password
       database_name _config.database_config.schema
+      host '%'
       action [:create, :grant]
     end
   end
