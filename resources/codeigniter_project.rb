@@ -117,6 +117,7 @@ action :create do
     cookbook COOKBOOK_NAME
     variables({
         document_root: _config.document_root,
+        shared_files_directory: _config.shared_files_directory,
         domain: _config.domain,
         fpm_pool_socket: fpm_pool_socket
     })

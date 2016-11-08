@@ -3,6 +3,8 @@ server {
   listen [::]:80;
   server_name <%= @domain %>;
   root <%= @document_root %>;
+  error_log <%= @shared_files_directory %>/log/nginx.error.log;
+  access_log <%= @shared_files_directory %>/log/nginx.access.log;
   index index.html index.php;
 
   location / {
