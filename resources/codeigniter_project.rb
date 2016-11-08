@@ -95,8 +95,8 @@ action :create do
     source 'environment.erb'
     cookbook COOKBOOK_NAME
     variables({
-                  database_config: _config.database_config,
-                  application_config: _config.database_config,
+                  database_config: _config.database_config.to_hash,
+                  application_config: _config.database_config.to_hash,
                   environemnt_variable_prefix: _config.environment_variable_prefix
               })
     owner file_owner
