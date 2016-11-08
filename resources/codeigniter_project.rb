@@ -9,6 +9,7 @@ property :language, String, default: 'english'
 property :log_threshold, Integer, default: 1
 property :config, Hash, default: {}
 property :manage_local_database, [TrueClass, FalseClass], default: true
+property :fpm_pool_socket, String, default: 'unix:///var/run/php-fpm.sock'
 property :database_host, String, default: 'localhost'
 property :database_port, Integer
 property :database_user, String
@@ -116,7 +117,8 @@ action :create do
     cookbook COOKBOOK_NAME
     variables({
         document_root: _config.document_root,
-        domain: _config.domain
+        domain: _config.domain,
+        fpm_pool_socket: fpm_pool_socket
     })
   end
 
