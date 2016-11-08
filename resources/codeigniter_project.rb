@@ -21,6 +21,8 @@ property :codeigniter_version, Integer, default: 3
 property :file_owner, String
 property :file_group, String
 
+COOKBOOK_NAME = 'ama-codeigniter-project'
+
 def compute_config()
   _config = AMA::CodeigniterProject::Configuration.new
   _config.id = id
@@ -73,6 +75,7 @@ action :create do
 
   template "#{_config_directory}/config.php" do
     source "config.php.erb"
+    cookbook COOKBOOK_NAME
     variables _config.application_config.to_hash
     owner file_owner
     group file_group
@@ -81,6 +84,7 @@ action :create do
 
   template "#{_config_directory}/database.php" do
     source "codeigniter-#{_config.codeigniter_version}/database.php.erb"
+    cookbook COOKBOOK_NAME
     variables _config.database_config.to_hash
     owner file_owner
     group file_group
@@ -89,6 +93,7 @@ action :create do
 
   template "#{_config_directory}/environment.php" do
     source 'environment.erb'
+    cookbook COOKBOOK_NAME
     variables({
                   database_config: _config.database_config,
                   application_config: _config.database_config,
@@ -101,6 +106,7 @@ action :create do
 
   template "/etc/nginx/sites-available/#{_config.domain}" do
     source 'nginx-site.conf.erb'
+    cookbook COOKBOOK_NAME
     variables({
         document_root: _config.document_root,
         domain: _config.domain
