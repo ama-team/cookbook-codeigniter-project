@@ -142,6 +142,7 @@ action :create do
       connection mysql_connection
       password _config.database_config.password
       database_name _config.database_config.schema
+      action [:create, :grant]
     end
   end
 end
