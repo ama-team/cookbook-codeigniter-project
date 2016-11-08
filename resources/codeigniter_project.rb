@@ -15,6 +15,8 @@ property :database_user, String
 property :database_password, String
 property :database_schema, String
 property :database_config, Hash, default: {}
+property :database_management_user, String, default: 'root'
+property :database_management_password, String, default: 'root'
 property :environment_variable_prefix, String
 property :manage_environment_file, [TrueClass, FalseClass], default: true
 property :codeigniter_version, Integer, default: 3
@@ -120,8 +122,8 @@ action :create do
   if _config.manage_local_database
     mysql_connection = {
         host: _config.database_config.host,
-        username: 'root',
-        password: 'root'
+        username: database_management_user,
+        password: database_management_password
     }
 
     mysql_database _config.database_config.schema do
