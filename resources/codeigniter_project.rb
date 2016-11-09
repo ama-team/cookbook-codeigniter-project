@@ -142,7 +142,7 @@ action :create do
       password _config.database_config.password
       database_name _config.database_config.schema
       host '%'
-      action [:create, :grant]
+      action([:create, :grant])
     end
   end
 end
